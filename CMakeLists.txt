@@ -62,7 +62,7 @@ ENDIF (APPLE)
 project(${PRJ_NAME})
 
 add_subdirectory(src)
-add_subdirectory(tests)
+# add_subdirectory(tests)
 add_subdirectory(examples)
 
 #set enable testing

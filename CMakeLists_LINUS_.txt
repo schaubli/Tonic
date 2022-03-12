@@ -1,0 +1,27 @@
+project(Tonic)
+cmake_minimum_required(VERSION 2.8)
+message(${CMAKE_CURRENT_SOURCE_DIR})
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Tonic SRC_LIST)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src SRC_LIST)
+add_library(TonicLib ${SRC_LIST})
+
+target_include_directories(TonicLib PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/Tonic.h")
+ADD_EXECUTABLE(TonicDemo "${CMAKE_CURRENT_SOURCE_DIR}/examples/Standalone/TonicStandaloneDemo/main.cpp" ${SRC_LIST}  )
+add_library(RtAudio "${CMAKE_CURRENT_SOURCE_DIR}/include/RtAudio.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/RtAudio.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/RtError.h")
+add_library(ASIO "${CMAKE_CURRENT_SOURCE_DIR}/include/asio.cpp"
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asio.h"
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asiodrivers.cpp" 
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asiodrivers.h"
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asiodrvr.h"
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asiolist.cpp"
+				"${CMAKE_CURRENT_SOURCE_DIR}/include/asiosys.h"
+			)
+target_link_libraries(TonicDemo TonicLib RtAudio ASIO)
+
+target_include_directories(TonicDemo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/Tonic.h)
+
+# FILE(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+# INSTALL(FILES ${headers} DESTINATION include/Tonic)
+# INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Tonic.h DESTINATION include)
+
+# INSTALL(TARGETS TonicLib ARCHIVE DESTINATION lib)

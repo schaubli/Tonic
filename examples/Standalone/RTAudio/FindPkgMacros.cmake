@@ -13,16 +13,12 @@
 
 # Begin processing of package
 macro(findpkg_begin PREFIX)
-  if (NOT ${PREFIX}_FIND_QUIETLY)
     message(STATUS "Looking for ${PREFIX}...")
-  endif ()
 endmacro(findpkg_begin)
 
 # Display a status message unless FIND_QUIETLY is set
 macro(pkg_message PREFIX)
-  if (NOT ${PREFIX}_FIND_QUIETLY)
     message(STATUS ${ARGN})
-  endif ()
 endmacro(pkg_message)
 
 # Get environment variable, define it as ENV_$var and make sure backslashes are converted to forward slashes
@@ -106,9 +102,7 @@ macro(findpkg_finish PREFIX)
       set(${PREFIX}_FOUND TRUE CACHE BOOL "Found ${PREFIX}")
       set(${PREFIX}_INCLUDE_DIRS ${${PREFIX}_INCLUDE_DIR} CACHE STRING "${PREFIX} include dirs")
       set(${PREFIX}_LIBRARIES ${${PREFIX}_LIBRARY} CACHE STRING "${PREFIX} libraries")
-      if (NOT ${PREFIX}_FIND_QUIETLY)
         message(STATUS "Found ${PREFIX}: ${${PREFIX}_LIBRARIES}")
-	set(${PREFIX}_FIND_QUIETLY 1 CACHE BOOL "find quietly")
       endif ()
     else ()
       if (NOT ${PREFIX}_FIND_QUIETLY)
