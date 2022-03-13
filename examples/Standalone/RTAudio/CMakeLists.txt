@@ -181,7 +181,6 @@ if (AUDIO_WINDOWS_DS)
         
         else(NOT DirectX_FOUND)
       
-        message( STATUS "Directsound was found" )
         target_link_libraries(DirectX_LIBRARY)
         target_compile_definitions("-I${DirectX_INCLUDE_DIR}" )
         
